@@ -9,9 +9,8 @@ body {
 
 .sääLomake {
     margin: 20px;
-    
-    
 }
+
 /* Syöttökenttä paikkakunnalle */
 .syötäKaupunki {
     padding: 10px;
@@ -23,7 +22,6 @@ body {
     border-color: rgb(0, 217, 255);
     width: 250px;
 }
-
 
 /* Hakunapin muotoilut */
 button[type="submit"] {
