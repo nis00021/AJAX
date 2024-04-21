@@ -33,7 +33,7 @@ sääLomake.addEventListener("submit", async event => {
 
 // Määritetään funktio hakemaan säätiedot openweathermapin apista.
 async function haeSääData(kaupunki) {
-    const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${kaupunki}&lang=fi&appid=${apiKey}`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${kaupunki}&lang=fi&appid=${apiKey}`;
     const response = await fetch(apiUrl);
 
 // Varaudutaan mahdollisuuteen että kirjoitettua paikkakuntaa ei löydy tietokannasta.
