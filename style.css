@@ -43,7 +43,8 @@ button[type="submit"]:hover {
 /* Tietoalueen muotoilut */
 .kortti {
     
-    border: black solid;
+    border: black solid 1px;
+    box-shadow: 10px 5px 5px rgba(15, 228, 228, 0.8);
     border-radius: 10px;
     padding: 50px;
     background-image: url(./background/brick-wall.png);
