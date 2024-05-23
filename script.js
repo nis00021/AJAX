@@ -16,12 +16,18 @@ $(document).ready(function() {
         }
     });
 
-    function haeSääData(kaupunki) { 
+    function haeSääData(kaupunki) {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${kaupunki}&lang=fi&appid=${apiKey}`;
-        return $.getJSON(apiUrl).fail(function() { 
+        return $.ajax({
+            url: apiUrl,
+            dataType: 'json'
+        }).then(data => {
+            return data;
+        }).catch(() => {
             throw new Error("Paikkakuntaa ei löydy.");
         });
     }
+    
 
     function näytäSää(data) {
         const { name: kaupunki, main: { temp, humidity, feels_like }, weather: [{ description, id }], wind: { speed } } = data;
@@ -30,15 +36,26 @@ $(document).ready(function() {
 
         
         const näytäKaupunki = $("<h1>").text(kaupunki).addClass("näytäKaupunki"); 
-        const näytäEmoji = $("<p>").text(haeSääEmoji(id)).addClass("näytäEmoji");
-        const näytäLämpö = $("<p>").text(`${(temp - 273.15).toFixed(1)}°C`).addClass("näytäLämpö").addClass(temp - 273.15 < 0 ? "pakkanen" : "plussa");
-        const tuntuuKuin = $("<p>").text(`Tuntuu kuin: ${(feels_like - 273.15).toFixed(1)}°C`).addClass("tuntuuKuin");
-        const näytäTuuli = $("<p>").text(`Tuuli: ${speed.toFixed(0)} m/s`).addClass("näytäTuuli");
-        const näytäKosteus = $("<p>").text(`Kosteus: ${humidity}%`).addClass("näytäKosteus");
-        const näytäKuvaus = $("<p>").text(description).addClass("näytäKuvaus"); 
+        const näytäEmoji = $("<p>").text(haeSääEmoji(id)).addClass("näytäEmoji").hide();
+        const näytäLämpö = $("<p>").text(`${(temp - 273.15).toFixed(1)}°C`).addClass("näytäLämpö").addClass(temp - 273.15 < 0 ? "pakkanen" : "plussa").hide();
+        const tuntuuKuin = $("<p>").text(`Tuntuu kuin: ${(feels_like - 273.15).toFixed(1)}°C`).addClass("tuntuuKuin").hide();
+        const näytäTuuli = $("<p>").text(`Tuuli: ${speed.toFixed(0)} m/s`).addClass("näytäTuuli").hide();
+        const näytäKosteus = $("<p>").text(`Kosteus: ${humidity}%`).addClass("näytäKosteus").hide();
+        const näytäKuvaus = $("<p>").text(description).addClass("näytäKuvaus").hide(); 
         
 
         $(".kortti").append(näytäKaupunki, näytäEmoji, näytäLämpö, tuntuuKuin, näytäTuuli, näytäKosteus, näytäKuvaus);
+
+        $(".kortti").show() ;
+
+    
+        näytäEmoji.delay(250).fadeIn(2000);
+        näytäLämpö.delay(500).fadeIn(2000);
+        tuntuuKuin.delay(750).fadeIn(2000);
+        näytäTuuli.delay(1000).fadeIn(2000);
+        näytäKosteus.delay(1250).fadeIn(2000);
+        näytäKuvaus.delay(1500).fadeIn(2000);
+        
     }
 
     function haeSääEmoji(sääId) {
