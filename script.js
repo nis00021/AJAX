@@ -19,7 +19,7 @@ $(document).ready(function() {
     // Funktio säätietojen hakemiseen 
     function haeSääData(kaupunki) {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${kaupunki}&lang=fi&appid=${apiKey}`;
-        return $.ajax({
+        return $.ajax({     //jQuery AJAX pyyntö
             url: apiUrl,
             dataType: 'json'
         }).then(data => {
@@ -52,10 +52,10 @@ $(document).ready(function() {
         // jQuery fadeIn asetukset
         näytäEmoji.delay(250).fadeIn(2000);
         näytäLämpö.delay(500).fadeIn(2000);
-        tuntuuKuin.delay(750).fadeIn(2000);
-        näytäTuuli.delay(1000).fadeIn(2000);
-        näytäKosteus.delay(1250).fadeIn(2000);
-        näytäKuvaus.delay(1500).fadeIn(2000);
+        tuntuuKuin.delay(750).fadeIn(2000).fadeOut(5000);
+        näytäTuuli.delay(1000).fadeIn(2000).fadeOut(5000);
+        näytäKosteus.delay(1250).fadeIn(2000).fadeOut(5000);
+        näytäKuvaus.delay(1500).fadeIn(2000).fadeOut(5000);
         
     }
         // Sopivan sääemojin haku
@@ -71,7 +71,7 @@ $(document).ready(function() {
             default: return "❓";
         }
     }
-
+        // Funktio virheen varalle
     function näytäVirhe(viesti) { 
         const virheNäyttö = $("<p>").text(viesti).addClass("virheNäyttö"); 
         $(".kortti").empty().css("display", "flex").append(virheNäyttö); 
