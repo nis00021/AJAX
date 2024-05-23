@@ -16,6 +16,7 @@ $(document).ready(function() {
         }
     });
 
+    // Funktio säätietojen hakemiseen 
     function haeSääData(kaupunki) {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${kaupunki}&lang=fi&appid=${apiKey}`;
         return $.ajax({
@@ -28,7 +29,7 @@ $(document).ready(function() {
         });
     }
     
-
+    // Funktio säätietojen näyttämiseen
     function näytäSää(data) {
         const { name: kaupunki, main: { temp, humidity, feels_like }, weather: [{ description, id }], wind: { speed } } = data;
 
@@ -48,7 +49,7 @@ $(document).ready(function() {
 
         $(".kortti").show() ;
 
-    
+        // jQuery fadeIn asetukset
         näytäEmoji.delay(250).fadeIn(2000);
         näytäLämpö.delay(500).fadeIn(2000);
         tuntuuKuin.delay(750).fadeIn(2000);
@@ -57,7 +58,7 @@ $(document).ready(function() {
         näytäKuvaus.delay(1500).fadeIn(2000);
         
     }
-
+        // Sopivan sääemojin haku
     function haeSääEmoji(sääId) {
         switch(true) {
             case (sääId >= 200 && sääId < 300): return "⛈️";
