@@ -1,6 +1,7 @@
 $(document).ready(function() { 
     const apiKey = "2aed28d65691307452819aea8410a262";
 
+    // Varmistetaan että kaupunki on syötetty
     $(".sääLomake").on("submit", function(event) { 
         event.preventDefault();
         const kaupunki = $(".syötäKaupunki").val(); 
@@ -35,7 +36,7 @@ $(document).ready(function() {
 
         $(".kortti").empty().css("display", "flex"); 
 
-        
+        // Määritellään mitä kussakin kohdassa käyttäjälle näytetään ja yhdistetään muotoilut style.css kanssa
         const näytäKaupunki = $("<h1>").text(kaupunki).addClass("näytäKaupunki"); 
         const näytäEmoji = $("<p>").text(haeSääEmoji(id)).addClass("näytäEmoji").hide();
         const näytäLämpö = $("<p>").text(`${(temp - 273.15).toFixed(1)}°C`).addClass("näytäLämpö").addClass(temp - 273.15 < 0 ? "pakkanen" : "plussa").hide();
